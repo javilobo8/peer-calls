@@ -76,7 +76,7 @@ extends React.PureComponent<ToolbarProps, ToolbarState> {
   handleMicClick = () => {
     const { stream } = this.props
     stream.stream.getAudioTracks().forEach(track => {
-      track.enabled = !track.enabled
+      track.enabled = !this.state.micMuted
     })
     this.setState({
       ...this.state,
@@ -126,6 +126,14 @@ extends React.PureComponent<ToolbarProps, ToolbarState> {
       this.props.onGetDesktopStream().catch(() => {})
     }
   }
+
+  componentDidMount() {
+    this.props.stream.stream.getAudioTracks().forEach(track => {
+      console.log('componentDidMount', track.enabled)
+      track.enabled = false
+    })
+  }
+
   render () {
     const { messagesCount, stream } = this.props
     const unreadCount = messagesCount - this.state.readMessages

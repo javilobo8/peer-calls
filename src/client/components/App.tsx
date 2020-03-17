@@ -100,23 +100,25 @@ export default class App extends React.PureComponent<AppProps, AppState> {
     return (
       <div className="app">
         <Side align='flex-end' left zIndex={2}>
-          <Toolbar
-            chatVisible={this.state.chatVisible}
-            messagesCount={messagesCount}
-            onToggleChat={this.handleToggleChat}
-            onSendFile={onSendFile}
-            onHangup={this.onHangup}
-            stream={
-              localStreams.streams
-              .filter(s => s.type === constants.STREAM_TYPE_CAMERA)[0]
-            }
-            desktopStream={
-              localStreams.streams
-              .filter(s => s.type === constants.STREAM_TYPE_DESKTOP)[0]
-            }
-            onGetDesktopStream={this.props.getDesktopStream}
-            onRemoveStream={this.props.removeStream}
-          />
+          {localStreams.streams && localStreams.streams.length && (
+            <Toolbar
+              chatVisible={this.state.chatVisible}
+              messagesCount={messagesCount}
+              onToggleChat={this.handleToggleChat}
+              onSendFile={onSendFile}
+              onHangup={this.onHangup}
+              stream={
+                localStreams.streams
+                .filter(s => s.type === constants.STREAM_TYPE_CAMERA)[0]
+              }
+              desktopStream={
+                localStreams.streams
+                .filter(s => s.type === constants.STREAM_TYPE_DESKTOP)[0]
+              }
+              onGetDesktopStream={this.props.getDesktopStream}
+              onRemoveStream={this.props.removeStream}
+            />
+          )}
         </Side>
         <Side className={chatVisibleClassName} top zIndex={1}>
           <Notifications
