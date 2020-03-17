@@ -19,7 +19,7 @@ export class MediaStream {
   getAudioTracks () {
     return [{
       stop: jest.fn(),
-      enabled: true,
+      enabled: false,
     }]
   }
 }
