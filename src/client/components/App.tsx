@@ -132,48 +132,50 @@ export default class App extends React.PureComponent<AppProps, AppState> {
           sendMessage={sendMessage}
           visible={this.state.chatVisible}
         />
-        <div className={classnames('videos', chatVisibleClassName)}>
-          {localStreams.streams.map((s, i) => {
-            const key = localStreams.userId + '_' + i
-            return (
-              <Video
-                key={key}
-                active={active === key}
-                onClick={toggleActive}
-                play={play}
-                stream={s}
-                userId={key}
-                muted
-                mirrored={s.type === 'camera'}
-                nickname={getNickname(nicknames, localStreams.userId)}
-                onChangeNickname={this.props.sendMessage}
-                localUser
-              />
-            )
-          })}
-          {
-            map(peers, (_, userId) => userId)
-            .filter(stream => !!stream)
-            .map(userId => streams[userId])
-            .filter(userStreams => !!userStreams)
-            .map(userStreams => {
-              return userStreams.streams.map((s, i) => {
-                const key = userStreams.userId + '_' + i
-                return (
-                  <Video
-                    active={key === active}
-                    key={key}
-                    onClick={toggleActive}
-                    play={play}
-                    stream={s}
-                    userId={key}
-                    nickname={getNickname(nicknames, userStreams.userId)}
-                    onChangeNickname={this.props.sendMessage}
-                  />
-                )
+        <div className='videos-parent'>
+          <div className={classnames('videos', chatVisibleClassName)}>
+            {localStreams.streams.map((s, i) => {
+              const key = localStreams.userId + '_' + i
+              return (
+                <Video
+                  key={key}
+                  active={active === key}
+                  onClick={toggleActive}
+                  play={play}
+                  stream={s}
+                  userId={key}
+                  muted
+                  mirrored={s.type === 'camera'}
+                  nickname={getNickname(nicknames, localStreams.userId)}
+                  onChangeNickname={this.props.sendMessage}
+                  localUser
+                />
+              )
+            })}
+            {
+              map(peers, (_, userId) => userId)
+              .filter(stream => !!stream)
+              .map(userId => streams[userId])
+              .filter(userStreams => !!userStreams)
+              .map(userStreams => {
+                return userStreams.streams.map((s, i) => {
+                  const key = userStreams.userId + '_' + i
+                  return (
+                    <Video
+                      active={key === active}
+                      key={key}
+                      onClick={toggleActive}
+                      play={play}
+                      stream={s}
+                      userId={key}
+                      nickname={getNickname(nicknames, userStreams.userId)}
+                      onChangeNickname={this.props.sendMessage}
+                    />
+                  )
+                })
               })
-            })
-          }
+            }
+          </div>
         </div>
       </div>
     )

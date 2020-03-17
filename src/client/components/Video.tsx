@@ -67,7 +67,8 @@ export default class Video extends React.PureComponent<VideoProps> {
   }
   render () {
     const { active, mirrored, muted, userId } = this.props
-    const className = classnames('video-container', { active, mirrored })
+    const className = classnames('video-container', { active, mirrored });
+
     return (
       <div className={className}>
         <video
@@ -83,11 +84,11 @@ export default class Video extends React.PureComponent<VideoProps> {
           ref={this.videoRef}
           muted={muted}
         />
-        <Nickname
+        {/* <Nickname
           value={this.props.nickname}
           onChange={this.props.onChangeNickname}
           localUser={this.props.localUser}
-        />
+        /> */}
       </div>
     )
   }
