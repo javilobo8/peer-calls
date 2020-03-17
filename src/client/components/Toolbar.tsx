@@ -68,7 +68,7 @@ extends React.PureComponent<ToolbarProps, ToolbarState> {
     this.state = {
       readMessages: props.messagesCount,
       camDisabled: false,
-      micMuted: false,
+      micMuted: true,
       fullScreenEnabled: false,
     }
   }
